@@ -1,0 +1,117 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+    font-family: sans-serif;
+    margin: 20px 0;
+}
+
+#game-container {
+    width: 500px;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Estilos das barras e ações continuam os mesmos */
+#status-bars { margin-bottom: 20px; }
+.status { margin-bottom: 10px; }
+.bar-container { width: 100%; background-color: #e0e0e0; border-radius: 5px; height: 20px; overflow: hidden; }
+.bar { height: 100%; width: 100%; border-radius: 5px; transition: width 0.5s ease-in-out; }
+#hunger-bar { background-color: #f44336; }
+#thirst-bar { background-color: #2196F3; }
+#happiness-bar { background-color: #4CAF50; }
+#actions { display: flex; justify-content: space-around; margin-bottom: 20px; }
+#actions button { padding: 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; display: flex; flex-direction: column; align-items: center; gap: 5px; background-color: #ddd; }
+#actions button:hover { background-color: #ccc; }
+#actions button img { width: 40px; height: 40px; }
+
+#jar-container {
+    width: 100%;
+    height: 300px;
+    border: 2px dashed #ccc;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    position: relative; /* Essencial para posicionar os itens dentro */
+    transition: background-image 1s ease-in-out; /* Transição suave */
+}
+
+/* NOVO: Estilos para o ciclo dia/noite */
+.day {
+    background-image: url('assets/fundo_pote_dia.png');
+}
+.night {
+    background-image: url('assets/fundo_pote_noite.png');
+}
+
+#gecko-sprite {
+    max-width: 100px;
+    transition: transform 0.3s;
+    z-index: 10; /* Garante que a lagartixa fique na frente dos itens */
+}
+
+/* NOVO: Estilos para os itens no pote */
+#jar-items {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+.jar-item {
+    position: absolute; /* Permite posicionamento exato */
+    width: 60px; /* Tamanho do item */
+    height: 60px;
+    z-index: 5; /* Fica atrás da lagartixa */
+}
+
+
+#message-log {
+    text-align: center;
+    font-style: italic;
+    color: #555;
+    height: 40px; /* Altura fixa para não "pular" */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* NOVO: Estilos da Loja */
+#shop-container {
+    margin-top: 20px;
+    border-top: 2px solid #eee;
+    padding-top: 15px;
+}
+#shop-items {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.shop-item-btn {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+.shop-item-btn:hover {
+    border-color: #888;
+}
+.shop-item-btn:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.shop-item-btn img {
+    width: 50px;
+    height: 50px;
+}
