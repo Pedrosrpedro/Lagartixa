@@ -681,7 +681,7 @@ diaryButton.addEventListener('click', openDiaryModal);
 achievementsButton.addEventListener('click', openAchievementsModal);
 useCaveButton.addEventListener('click', useCave);
 usePoolButton.addEventListener('click', usePool);
-releaseButton.addEventListener('click', releaseGo);
+releaseButton.addEventListener('click', releaseGecko);
 
 // ==========================================================================
 // 11. INICIALIZAÇÃO GERAL DO JOGO
