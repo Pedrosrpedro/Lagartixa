@@ -245,6 +245,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // O PONTO DE ENTRADA PRINCIPAL PARA O JOGO EM SI
     window.initializeGame = initializeGame;
-});```
-
-Ok, agora pode colar este código em `script_data.js` e eu lhe enviarei a segunda parte.
+});
