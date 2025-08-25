@@ -9,8 +9,16 @@
 <body>
 
     <div id="game-container">
+        <!-- NOVO: Contador de dias e Barra de Saúde -->
+        <div id="header-info">
+            <span>Dias Sobrevividos: <span id="days-display">0</span></span>
+        </div>
+        <div class="status">
+            <span>Saúde:</span>
+            <div class="bar-container"><div id="health-bar" class="bar"></div></div>
+        </div>
+        
         <div id="status-bars">
-            <!-- Barras de status continuam as mesmas -->
             <div class="status">
                 <span>Fome:</span>
                 <div class="bar-container"><div id="hunger-bar" class="bar"></div></div>
@@ -26,13 +34,11 @@
         </div>
 
         <div id="jar-container">
-            <!-- NOVO: Container para os itens comprados -->
             <div id="jar-items"></div>
             <img id="gecko-sprite" src="assets/gecko_normal.png" alt="Lagartixa">
         </div>
 
         <div id="actions">
-            <!-- Botões de ação continuam os mesmos -->
             <button id="feed-button"><img src="assets/icone_comida.png" alt="Comida">Alimentar</button>
             <button id="water-button"><img src="assets/icone_agua.png" alt="Água">Dar Água</button>
             <button id="explore-button"><img src="assets/icone_explorar.png" alt="Explorar">Explorar</button>
@@ -42,13 +48,19 @@
             <p>Sua lagartixa parece contente.</p>
         </div>
         
-        <!-- NOVA SEÇÃO: LOJA -->
         <div id="shop-container">
-            <h3>Loja</h3>
+            <h3>Loja de Itens (com bônus!)</h3>
             <p>Pontos: <span id="points-display">0</span></p>
-            <div id="shop-items">
-                <!-- Os itens da loja serão adicionados aqui pelo JavaScript -->
-            </div>
+            <div id="shop-items"></div>
+        </div>
+    </div>
+    
+    <!-- NOVO: Tela de Game Over -->
+    <div id="game-over-screen" class="hidden">
+        <div class="game-over-box">
+            <h2>Fim de Jogo</h2>
+            <p>Sua lagartixa sobreviveu por <span id="final-days">0</span> dias.</p>
+            <button id="restart-button">Reiniciar</button>
         </div>
     </div>
 
