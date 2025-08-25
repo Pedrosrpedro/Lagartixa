@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Lagartixa no Pote</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="game-container">
+        <div id="status-bars">
+            <!-- Barras de status continuam as mesmas -->
+            <div class="status">
+                <span>Fome:</span>
+                <div class="bar-container"><div id="hunger-bar" class="bar"></div></div>
+            </div>
+            <div class="status">
+                <span>Sede:</span>
+                <div class="bar-container"><div id="thirst-bar" class="bar"></div></div>
+            </div>
+            <div class="status">
+                <span>Felicidade:</span>
+                <div class="bar-container"><div id="happiness-bar" class="bar"></div></div>
+            </div>
+        </div>
+
+        <div id="jar-container">
+            <!-- NOVO: Container para os itens comprados -->
+            <div id="jar-items"></div>
+            <img id="gecko-sprite" src="assets/gecko_normal.png" alt="Lagartixa">
+        </div>
+
+        <div id="actions">
+            <!-- Botões de ação continuam os mesmos -->
+            <button id="feed-button"><img src="assets/icone_comida.png" alt="Comida">Alimentar</button>
+            <button id="water-button"><img src="assets/icone_agua.png" alt="Água">Dar Água</button>
+            <button id="explore-button"><img src="assets/icone_explorar.png" alt="Explorar">Explorar</button>
+        </div>
+
+        <div id="message-log">
+            <p>Sua lagartixa parece contente.</p>
+        </div>
+        
+        <!-- NOVA SEÇÃO: LOJA -->
+        <div id="shop-container">
+            <h3>Loja</h3>
+            <p>Pontos: <span id="points-display">0</span></p>
+            <div id="shop-items">
+                <!-- Os itens da loja serão adicionados aqui pelo JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
