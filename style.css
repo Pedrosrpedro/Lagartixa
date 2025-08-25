@@ -1,38 +1,215 @@
+/* ==========================================================================
+   Estilos Gerais e Estrutura do Corpo
+   ========================================================================== */
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f0f0f0;
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 20px 0;
+    transition: background-image 0.8s ease-in-out;
+    background-size: cover;
+    background-position: center;
+    background-color: #f0f0f0; /* Fundo padrão */
 }
 
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================================================
+   Menus e Modais (Pop-ups)
+   ========================================================================== */
+
+/* Estilo Base para todos os Modais */
+.modal {
+    position: fixed;
+    z-index: 200;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 20px 30px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    animation: modal-fade-in 0.3s ease-out;
+}
+
+@keyframes modal-fade-in {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #000;
+}
+
+/* Menu Principal e Tela de Legado */
+#main-menu, #legacy-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e0e0e0;
+    z-index: 250; /* Fica acima de tudo */
+    text-align: center;
+}
+
+.menu-box {
+    background: white;
+    padding: 40px 60px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.menu-box h1 {
+    margin-top: 0;
+    color: #333;
+}
+
+.menu-box button, #legacy-menu button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    transition: background-color 0.2s;
+}
+
+.menu-box button:hover, #legacy-menu button:hover {
+    background-color: #f0f0f0;
+}
+
+.menu-box button:disabled {
+    background-color: #e0e0e0;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Tela de Game Over */
+.game-over-box {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+#restart-button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* ==========================================================================
+   Container Principal do Jogo
+   ========================================================================== */
+
 #game-container {
-    width: 500px;
+    width: 90%;
+    max-width: 600px;
     border: 2px solid #333;
     border-radius: 10px;
     padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    position: relative;
 }
 
-/* Estilos das barras e ações continuam os mesmos */
-#status-bars { margin-bottom: 20px; }
-.status { margin-bottom: 10px; }
-.bar-container { width: 100%; background-color: #e0e0e0; border-radius: 5px; height: 20px; overflow: hidden; }
-.bar { height: 100%; width: 100%; border-radius: 5px; transition: width 0.5s ease-in-out; }
-#hunger-bar { background-color: #f44336; }
-#thirst-bar { background-color: #2196F3; }
-#happiness-bar { background-color: #4CAF50; }
-#actions { display: flex; justify-content: space-around; margin-bottom: 20px; }
-#actions button { padding: 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; display: flex; flex-direction: column; align-items: center; gap: 5px; background-color: #ddd; }
-#actions button:hover { background-color: #ccc; }
-#actions button img { width: 40px; height: 40px; }
+#header-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+    padding: 0 10px;
+    font-size: 0.9em;
+}
+
+#header-info > div {
+    text-align: center;
+}
+
+#habitat-name-display {
+    font-weight: bold;
+    color: #8854d0; /* Roxo */
+}
+
+#mood-status, #season-indicator, #sickness-status {
+    width: 24px;
+    height: 24px;
+    vertical-align: middle;
+}
+
+/* ==========================================================================
+   Barras de Status
+   ========================================================================== */
+
+.status {
+    margin-bottom: 10px;
+}
+
+.bar-container {
+    width: 100%;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    height: 22px;
+    overflow: hidden;
+    border: 1px solid #c0c0c0;
+}
+
+.bar {
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+    transition: width 0.5s ease-in-out;
+}
+
+#health-bar { background-color: #ff5252; } /* Vermelho Saúde */
+#hunger-bar { background-color: #ff9800; } /* Laranja Fome */
+#thirst-bar { background-color: #2196F3; } /* Azul Sede */
+#happiness-bar { background-color: #4CAF50; } /* Verde Felicidade */
+
+/* ==========================================================================
+   Habitat (Jar Container) e Elementos Visuais
+   ========================================================================== */
 
 #jar-container {
     width: 100%;
-    height: 300px;
+    height: 350px;
     border: 2px dashed #ccc;
     margin-bottom: 20px;
     display: flex;
@@ -40,120 +217,148 @@ body {
     align-items: center;
     background-size: cover;
     background-position: center;
-    position: relative; /* Essencial para posicionar os itens dentro */
-    transition: background-image 1s ease-in-out; /* Transição suave */
+    position: relative;
+    transition: background-image 1s ease-in-out;
+    overflow: hidden;
 }
 
-/* NOVO: Estilos para o ciclo dia/noite */
-.day {
-    background-image: url('assets/fundo_pote_dia.png');
-}
-.night {
-    background-image: url('assets/fundo_pote_noite.png');
-}
-
-#gecko-sprite {
-    max-width: 100px;
-    transition: transform 0.3s;
-    z-index: 10; /* Garante que a lagartixa fique na frente dos itens */
-}
-
-/* NOVO: Estilos para os itens no pote */
-#jar-items {
+/* Overlays de Estação e Clima */
+#season-overlay, #weather-overlay {
     position: absolute;
-    width: 100%;
-    height: 100%;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 15;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 3s ease-in-out;
 }
-.jar-item {
-    position: absolute; /* Permite posicionamento exato */
-    width: 60px; /* Tamanho do item */
-    height: 60px;
-    z-index: 5; /* Fica atrás da lagartixa */
+#season-overlay { mix-blend-mode: overlay; }
+.season-summer { background: radial-gradient(circle, rgba(255,215,0,0.2) 0%, rgba(255,140,0,0.1) 100%); }
+.season-autumn { background: radial-gradient(circle, rgba(218,165,32,0.2) 0%, rgba(139,69,19,0.1) 100%); }
+.season-winter { background: radial-gradient(circle, rgba(135,206,250,0.2) 0%, rgba(70,130,180,0.1) 100%); }
+.season-spring { background: radial-gradient(circle, rgba(152,251,152,0.2) 0%, rgba(60,179,113,0.1) 100%); }
+#weather-overlay.rain { background: url('assets/weather_rain.png') repeat; animation: rain-fall 0.5s linear infinite; }
+#weather-overlay.cloudy { background-color: rgba(100, 100, 100, 0.2); }
+@keyframes rain-fall { from { background-position: 0 0; } to { background-position: 0 100%; } }
+
+/* Camada de Substrato */
+#substrate-layer {
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 25%;
+    z-index: 1;
+    background-size: cover; background-position: bottom;
 }
 
-
-#message-log {
-    text-align: center;
-    font-style: italic;
-    color: #555;
-    height: 40px; /* Altura fixa para não "pular" */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* NOVO: Estilos da Loja */
-#shop-container {
-    margin-top: 20px;
-    border-top: 2px solid #eee;
-    padding-top: 15px;
-}
-#shop-items {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-.shop-item-btn {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+/* Sprites e Balões */
+#gecko-sprite {
+    max-width: 120px;
+    transition: transform 0.3s;
+    z-index: 10;
     cursor: pointer;
 }
-.shop-item-btn:hover {
-    border-color: #888;
+@keyframes wiggle { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1deg); } }
+.idle-animation { animation: wiggle 0.5s ease-in-out; }
+
+#thought-bubble, #whim-bubble {
+    position: absolute;
+    width: 60px; height: 60px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    z-index: 20;
+    top: 15%; left: 65%;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
 }
-.shop-item-btn:disabled {
-    background-color: #e0e0e0;
-    cursor: not-allowed;
-    opacity: 0.6;
+#whim-bubble { border: 3px solid #f1c40f; }
+
+/* Animações Especiais */
+#bird-sprite {
+    position: absolute; width: 150px; height: 150px;
+    z-index: 90;
+    transition: transform 1.5s ease-in-out;
 }
-.shop-item-btn img {
-    width: 50px;
-    height: 50px;
+.rare-visitor {
+    position: absolute; width: 60px; height: 60px;
+    z-index: 50;
+    animation: fade-in-out 5s ease-in-out;
+}
+@keyframes fade-in-out { 0%, 100% { opacity: 0; } 20%, 80% { opacity: 1; } }
+
+/* ==========================================================================
+   Mobiliário e Modo de Colocação
+   ========================================================================== */
+
+#jar-container.placement-mode { cursor: crosshair; }
+#placement-ghost { position: absolute; pointer-events: none; opacity: 0.6; z-index: 99; }
+.placed-furnishing {
+    position: absolute;
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+}
+.placed-furnishing.wall-item { z-index: 2; }
+.placed-furnishing.floor-item { z-index: 8; }
+
+/* ==========================================================================
+   Ações, Inventário e Loja
+   ========================================================================== */
+
+#actions {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+#actions button {
+    flex-basis: 30%;
+    padding: 8px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background-color: #ddd;
+    height: 80px;
+    transition: background-color 0.2s;
+}
+#actions button:hover { background-color: #ccc; }
+#actions button img { width: 30px; height: 30px; }
+.interactive-item-btn { background-color: #8e44ad; color: white; }
+#release-button { background-color: #ffd700; font-weight: bold; border: 2px solid #b8860b; }
+
+#message-log {
+    text-align: center; font-style: italic; color: #555;
+    height: 40px; display: flex; align-items: center; justify-content: center;
 }
 
-/* ... (estilos anteriores de body, game-container, etc) ... */
-body {
-    display: flex; justify-content: center; align-items: center; min-height: 100vh;
-    background-color: #f0f0f0; font-family: sans-serif; margin: 20px 0;
+#inventory-container {
+    margin-top: 15px; padding-top: 15px; border-top: 1px solid #eee;
 }
-#game-container {
-    width: 500px; border: 2px solid #333; border-radius: 10px; padding: 20px;
-    background-color: #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); position: relative;
+#inventory-items, #ingredient-inventory {
+    display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
 }
-
-/* NOVO: Header e Barra de Saúde */
-#header-info { text-align: center; margin-bottom: 10px; font-weight: bold; }
-#health-bar { background-color: #ff5252; } /* Cor para a saúde */
-
-#status-bars { margin-bottom: 20px; margin-top: 10px; }
-.status { margin-bottom: 10px; }
-.bar-container { width: 100%; background-color: #e0e0e0; border-radius: 5px; height: 20px; overflow: hidden; }
-.bar { height: 100%; width: 100%; border-radius: 5px; transition: width 0.5s ease-in-out; }
-#hunger-bar { background-color: #ff9800; }
-#thirst-bar { background-color: #2196F3; }
-#happiness-bar { background-color: #4CAF50; }
-
-/* ... (estilos de jar-container, sprites, ações, etc) ... */
-#jar-container {
-    width: 100%; height: 300px; border: 2px dashed #ccc; margin-bottom: 20px;
-    display: flex; justify-content: center; align-items: center; background-size: cover;
-    background-position: center; position: relative; transition: background-image 1s ease-in-out;
+.inventory-item {
+    width: 60px; height: 60px; border: 2px dashed #ccc;
+    cursor: pointer; background-size: contain; background-repeat: no-repeat;
+    background-position: center;
 }
-.day { background-image: url('assets/fundo_pote_dia.png'); }
-.night { background-image: url('assets/fundo_pote_noite.png'); }
-#gecko-sprite { max-width: 100px; transition: transform 0.3s; z-index: 10; }
-#jar-items { position: absolute; width: 100%; height: 100%; top: 0; left: 0; }
-.jar-item { position: absolute; width: 60px; height: 60px; z-index: 5; }
+.inventory-item:hover { border-color: #4CAF50; }
+.ingredient-item { text-align: center; font-size: 0.8em; }
+.ingredient-item img { width: 30px; height: 30px; }
 
-/* ... (estilos da loja, mensagens, etc) ... */
-#message-log { text-align: center; font-style: italic; color: #555; height: 40px; display: flex; align-items: center; justify-content: center; }
+/* Loja com Abas */
 #shop-container { margin-top: 20px; border-top: 2px solid #eee; padding-top: 15px; }
-#shop-items { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+#shop-tabs { display: flex; border-bottom: 1px solid #ccc; margin-bottom: 10px; }
+.shop-tab { flex-grow: 1; background: #f1f1f1; border: none; padding: 10px; cursor: pointer; }
+.shop-tab.active { background: #ddd; border-bottom: 3px solid #4CAF50; }
+.shop-content { padding: 10px 0; }
 .shop-item-btn {
     padding: 8px; border: 1px solid #ccc; border-radius: 5px; background-color: #f9f9f9;
     cursor: pointer; text-align: center; width: 120px;
@@ -162,21 +367,46 @@ body {
 .shop-item-btn:disabled { background-color: #e0e0e0; cursor: not-allowed; opacity: 0.6; }
 .shop-item-btn img { width: 50px; height: 50px; }
 .item-desc { font-size: 0.8em; color: #333; }
+.shop-item-btn.locked {
+    opacity: 0.5; position: relative;
+}
+.shop-item-btn.locked::after {
+    content: '🔒 Requer Habitat Melhor';
+    position: absolute; bottom: 5px; left: 0; right: 0;
+    font-size: 0.7em; color: #333; background-color: rgba(255, 255, 255, 0.8); padding: 2px;
+}
 
-/* NOVO: Estilos da Tela de Game Over */
-.hidden { display: none !important; }
-#game-over-screen {
-    position: fixed; /* Usa 'fixed' para cobrir a tela inteira */
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex; justify-content: center; align-items: center;
-    z-index: 100;
+/* ==========================================================================
+   Modais Específicos (Diário, Conquistas, Comida)
+   ========================================================================== */
+
+#achievements-list, #diary-log-list { list-style: none; padding: 0; max-height: 200px; overflow-y: auto; }
+#achievements-list li, #diary-log-list li { padding: 10px; border-bottom: 1px solid #eee; }
+#achievements-list li.unlocked { background-color: #e8f5e9; font-weight: bold; color: #2e7d32; }
+.achievement-progress { font-size: 0.8em; color: #666; }
+#diary-log-list li { margin-bottom: 5px; color: #555; }
+.recipe { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; border-radius: 5px; }
+.recipe-ingredients { font-size: 0.9em; color: #555; }
+.recipe-button { float: right; }
+
+/* ==========================================================================
+   Mini-jogo
+   ========================================================================== */
+
+#minigame-screen {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 150;
+    border-radius: 10px;
 }
-.game-over-box {
-    background-color: white; padding: 40px; border-radius: 10px;
-    text-align: center; box-shadow: 0 0 20px rgba(0,0,0,0.5);
+#minigame-info {
+    color: white; font-size: 1.5em; text-align: center;
+    padding: 20px; text-shadow: 2px 2px 4px #000;
 }
-#restart-button {
-    padding: 10px 20px; font-size: 1.2em; cursor: pointer;
-    border: none; border-radius: 5px; background-color: #4CAF50; color: white;
+#fly-target {
+    position: absolute;
+    width: 40px; height: 40px;
+    cursor: pointer;
+    transition: top 0.2s ease, left 0.2s ease;
 }
