@@ -5,6 +5,19 @@
 // atualizações de UI e sistemas complexos.
 // ==========================================================================
 
+// Expõe funções de gameplay para serem acessíveis por event listeners
+// que podem ser definidos antes deste script ser totalmente lido.
+window.petGecko = petGecko;
+window.forage = forage;
+window.giveWater = giveWater;
+window.openFoodPrepModal = openFoodPrepModal;
+window.startMinigame = startMinigame;
+window.openDiaryModal = openDiaryModal;
+window.openAchievementsModal = openAchievementsModal;
+window.useCave = useCave;
+window.usePool = usePool;
+window.releaseGecko = releaseGecko;
+
 function initializeGame() {
     // Aplica bônus permanentes do Legado
     if (gecko.legacyData.upgrades['instinto']) {
