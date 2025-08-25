@@ -6,61 +6,150 @@
     <title>Simulador de Lagartixa no Pote</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="game-body">
 
-    <div id="game-container">
-        <!-- NOVO: Contador de dias e Barra de Saúde -->
-        <div id="header-info">
-            <span>Dias Sobrevividos: <span id="days-display">0</span></span>
+    <!-- Tela de Legado (Aparece após libertar uma lagartixa) -->
+    <div id="legacy-menu" class="hidden modal">
+        <div class="modal-content">
+            <h2>Legado do Cuidador</h2>
+            <p>Você tem <span id="legacy-points-display">0</span> Pontos de Legado.</p>
+            <p>Essas melhorias são permanentes para todos os seus futuros pets.</p>
+            <div id="legacy-upgrades-list"></div>
+            <button id="start-new-legacy-game">Iniciar Nova Vida</button>
         </div>
+    </div>
+
+    <!-- Menu Principal (Primeira coisa que o jogador vê) -->
+    <div id="main-menu">
+        <div class="menu-box">
+            <h1>Lagartixa no Pote</h1>
+            <p>Um simulador de pet virtual</p>
+            <button id="new-game-button">Novo Jogo</button>
+            <button id="continue-button">Continuar</button>
+        </div>
+    </div>
+
+    <!-- Container Principal do Jogo (Inicialmente escondido) -->
+    <div id="game-container" class="hidden">
+        <div id="header-info">
+            <span id="gecko-name-display">Lagartixo</span>
+            <img id="mood-status" src="assets/humor_contente.png" title="Humor atual">
+            <img id="season-indicator" src="assets/icone_estacao_verao.png" title="Estação Atual">
+            <div>
+                <span id="habitat-name-display">Pote de Vidro</span><br>
+                <span id="furnishing-limit-display">Móveis: 0/4</span>
+            </div>
+            <img id="sickness-status" class="hidden" src="assets/icone_doente.png" title="Sua lagartixa está doente!">
+            <span>Dias: <span id="days-display">0</span></span>
+        </div>
+        
         <div class="status">
             <span>Saúde:</span>
             <div class="bar-container"><div id="health-bar" class="bar"></div></div>
         </div>
         
         <div id="status-bars">
-            <div class="status">
-                <span>Fome:</span>
-                <div class="bar-container"><div id="hunger-bar" class="bar"></div></div>
-            </div>
-            <div class="status">
-                <span>Sede:</span>
-                <div class="bar-container"><div id="thirst-bar" class="bar"></div></div>
-            </div>
-            <div class="status">
-                <span>Felicidade:</span>
-                <div class="bar-container"><div id="happiness-bar" class="bar"></div></div>
-            </div>
+             <div class="status"><span>Fome:</span><div class="bar-container"><div id="hunger-bar" class="bar"></div></div></div>
+             <div class="status"><span>Sede:</span><div class="bar-container"><div id="thirst-bar" class="bar"></div></div></div>
+             <div class="status"><span>Felicidade:</span><div class="bar-container"><div id="happiness-bar" class="bar"></div></div></div>
         </div>
 
         <div id="jar-container">
+            <div id="season-overlay"></div>
+            <div id="weather-overlay"></div>
+            <div id="substrate-layer"></div>
             <div id="jar-items"></div>
-            <img id="gecko-sprite" src="assets/gecko_normal.png" alt="Lagartixa">
+            <div id="whim-bubble" class="hidden"></div>
+            <div id="thought-bubble" class="hidden"></div>
+            <img id="gecko-sprite" src="assets/gecko_filhote_normal.png" alt="Lagartixa">
+            <img id="bird-sprite" class="hidden" src="assets/passaro.png" alt="Pássaro">
         </div>
 
         <div id="actions">
-            <button id="feed-button"><img src="assets/icone_comida.png" alt="Comida">Alimentar</button>
+            <button id="explore-button"><img src="assets/icone_explorar.png" alt="Explorar">Forragear</button>
+            <button id="prepare-food-button">Preparar Comida</button>
             <button id="water-button"><img src="assets/icone_agua.png" alt="Água">Dar Água</button>
-            <button id="explore-button"><img src="assets/icone_explorar.png" alt="Explorar">Explorar</button>
+            <button id="play-button">Brincar</button>
+            <button id="diary-button">Diário</button>
+            <button id="achievements-button">Conquistas</button>
+            <button id="save-button">Salvar</button>
+            <button id="use-cave-button" class="hidden interactive-item-btn">Esconder na Caverna</button>
+            <button id="use-pool-button" class="hidden interactive-item-btn">Usar Piscina</button>
+            <button id="release-button" class="hidden">Libertar</button>
         </div>
 
         <div id="message-log">
             <p>Sua lagartixa parece contente.</p>
         </div>
         
+        <div id="inventory-container">
+            <h4>Meu Mobiliário</h4>
+            <div id="inventory-items"></div>
+            <h4>Ingredientes</h4>
+            <div id="ingredient-inventory"></div>
+        </div>
+
         <div id="shop-container">
-            <h3>Loja de Itens (com bônus!)</h3>
+            <div id="shop-tabs">
+                <button class="shop-tab active" data-tab="tab-items">Itens</button>
+                <button class="shop-tab" data-tab="tab-furnishings">Mobiliário</button>
+                <button class="shop-tab" data-tab="tab-upgrades">Melhorias</button>
+                <button class="shop-tab" data-tab="tab-cosmetics">Cenários</button>
+            </div>
             <p>Pontos: <span id="points-display">0</span></p>
-            <div id="shop-items"></div>
+            <div id="tab-items" class="shop-content"></div>
+            <div id="tab-furnishings" class="shop-content hidden"></div>
+            <div id="tab-upgrades" class="shop-content hidden"></div>
+            <div id="tab-cosmetics" class="shop-content hidden"></div>
         </div>
     </div>
     
-    <!-- NOVO: Tela de Game Over -->
-    <div id="game-over-screen" class="hidden">
-        <div class="game-over-box">
+    <!-- Tela de Game Over -->
+    <div id="game-over-screen" class="hidden modal">
+        <div class="modal-content">
             <h2>Fim de Jogo</h2>
             <p>Sua lagartixa sobreviveu por <span id="final-days">0</span> dias.</p>
             <button id="restart-button">Reiniciar</button>
+        </div>
+    </div>
+    
+    <!-- Tela do Mini-jogo -->
+    <div id="minigame-screen" class="hidden">
+        <div id="minigame-info">Tempo: <span id="minigame-timer">10</span>s | Pegas: <span id="minigame-score">0</span></div>
+        <img src="assets/icone_comida.png" id="fly-target" alt="Mosca">
+    </div>
+
+    <!-- Modal de Conquistas -->
+    <div id="achievements-modal" class="hidden modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Conquistas</h2>
+            <ul id="achievements-list"></ul>
+        </div>
+    </div>
+
+    <!-- Modal do Diário -->
+    <div id="diary-modal" class="hidden modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Diário de <span id="diary-gecko-name"></span></h2>
+            <p><strong>Temperamento:</strong> <span id="diary-temperament"></span></'p>
+            <p><strong>Humor Atual:</strong> <span id="diary-mood"></span></p>
+            <hr>
+            <h3>Acontecimentos Recentes:</h3>
+            <ul id="diary-log-list"></ul>
+            <hr>
+            <h3>Habilidades:</h3>
+            <div id="diary-skills-list"></div>
+        </div>
+    </div>
+
+    <!-- Modal de Preparo de Comida -->
+    <div id="food-prep-modal" class="hidden modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Bancada do Chef</h2>
+            <div id="recipe-list"></div>
         </div>
     </div>
 
