@@ -670,5 +670,13 @@ useCaveButton.addEventListener('click', useCave);
 usePoolButton.addEventListener('click', usePool);
 releaseButton.addEventListener('click', releaseGo);
 
-// PONTO DE ENTRADA INICIAL DO SCRIPT
+// ==========================================================================
+// 11. INICIALIZAÇÃO GERAL DO JOGO
+// Este código só roda depois que ambos os scripts foram carregados.
+// ==========================================================================
+
+// Expõe a função para que script_data.js possa "vê-la"
+window.initializeGame = initializeGame; 
+
+// Agora que tudo está carregado e pronto, inicie o menu principal.
 setupMainMenu();
