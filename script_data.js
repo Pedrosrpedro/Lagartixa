@@ -242,7 +242,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         initializeGame();
     }
-    
-    // O PONTO DE ENTRADA PRINCIPAL PARA O JOGO EM SI
-    window.initializeGame = initializeGame;
+
+   
 });
