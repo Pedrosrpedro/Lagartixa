@@ -615,37 +615,60 @@ function showSuccessfulReleaseScreen() {
 // 9. HELPER FUNCTIONS (Funções Auxiliares)
 // ==========================================================================
 function playSound(soundName) {
-    try { new Audio(`assets/sound_${soundName}.mp3`).play(); } 
-    catch(e) { console.error(`Não foi possível tocar o som: ${soundName}`, e); }
+    try {
+        const audio = new Audio(`assets/sound_${soundName}.mp3`);
+        audio.play();
+    } 
+    catch(e) {
+        console.error(`Não foi possível tocar o som: ${soundName}`, e);
+        debugLog(`Erro ao tocar som: ${soundName}`);
+    }
 }
 
 function logToDiary(message) {
+    if (!gecko || !gecko.diaryLog) return;
     gecko.diaryLog.unshift(`Dia ${gecko.days}: ${message}`);
     if (gecko.diaryLog.length > 10) gecko.diaryLog.pop();
 }
 
-function disableAllButtons() { actionsContainer.querySelectorAll('button').forEach(b => b.disabled = true); }
-function enableAllButtons() { actionsContainer.querySelectorAll('button').forEach(b => b.disabled = false); }
+function disableAllButtons() {
+    actionsContainer.querySelectorAll('button').forEach(b => b.disabled = true);
+    debugLog("Botões de ação desabilitados.");
+}
+
+function enableAllButtons() {
+    actionsContainer.querySelectorAll('button').forEach(b => b.disabled = false);
+    debugLog("Botões de ação habilitados.");
+}
+
 function clearIntervals() {
     clearInterval(gameInterval);
     clearInterval(dayNightInterval);
     clearInterval(whimInterval);
     clearInterval(idleInterval);
+    debugLog("Todos os intervalos foram limpos.");
 }
+
 function restartIntervals() {
-    clearIntervals();
+    clearIntervals(); // Garante que não haja duplicatas
+    
+    // Inicia todos os loops do jogo
     gameInterval = setInterval(gameLoop, 2000);
     dayNightInterval = setInterval(toggleDayNight, 30000);
     idleInterval = setInterval(() => {
         const geckoImg = document.getElementById('gecko-sprite');
-        if (geckoImg) {
+        if (geckoImg && Math.random() < 0.2) {
             geckoImg.classList.add('idle-animation');
             setTimeout(() => geckoImg.classList.remove('idle-animation'), 500);
         }
-    }, 8000);
+    }, 4000);
     whimInterval = setInterval(() => {
-        if (!gecko.currentWhim && Math.random() < 0.3) generateWhim();
+        if (!gecko.currentWhim && Math.random() < 0.3) {
+            generateWhim();
+        }
     }, 15000);
+    
+    debugLog("Intervalos do jogo reiniciados com sucesso.");
 }
 
 // ==========================================================================
