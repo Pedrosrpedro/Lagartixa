@@ -160,12 +160,19 @@ function startGame(isNew, name) {
     mainMenu.classList.add('hidden');
     legacyMenu.classList.add('hidden');
     gameContainer.classList.remove('hidden');
+    
     if (isNew) {
         const legacyData = JSON.parse(localStorage.getItem('geckoLegacyData')) || { points: 0, upgrades: {} };
         gecko = createNewGecko(name, legacyData);
     } else {
         loadGame();
     }
-    // A chamada para initializeGame está no script_gameplay.js
-    window.initializeGame(); 
+    
+    debugLog("Dados da lagartixa prontos. Chamando initializeGame...");
+    if (typeof window.initializeGame === 'function') {
+        window.initializeGame();
+    } else {
+        debugLog("ERRO CRÍTICO: initializeGame() não foi encontrada!");
+        alert("Erro crítico: A função de inicialização do jogo não foi encontrada. Verifique se o arquivo script_gameplay.js está sendo carregado corretamente.");
+    }
 }
