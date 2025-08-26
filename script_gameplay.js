@@ -18,7 +18,23 @@ window.useCave = useCave;
 window.usePool = usePool;
 window.releaseGecko = releaseGecko;
 
-function initializeGame() {
+// ATRIBUI A FUNÇÃO À JANELA GLOBAL
+window.initializeGame = function() {
+    debugLog("Inicializando o jogo...");
+
+    // Aplica bônus permanentes do Legado
+    if (gecko.legacyData.upgrades['instinto']) {
+        const level = gecko.legacyData.upgrades['instinto'].level;
+        gecko.hunger = Math.min(100, gecko.hunger + (level * 10));
+        gecko.thirst = Math.min(100, gecko.thirst + (level * 10));
+    }
+    
+    // ... todo o resto do código da função initializeGame fica aqui dentro ...
+    // ... até o final da função ...
+    
+    restartIntervals();
+    debugLog("Jogo inicializado com sucesso.");
+}; // MUITO IMPORTANTE: Feche com }; em vez de }
     // Aplica bônus permanentes do Legado
     if (gecko.legacyData.upgrades['instinto']) {
         const level = gecko.legacyData.upgrades['instinto'].level;
